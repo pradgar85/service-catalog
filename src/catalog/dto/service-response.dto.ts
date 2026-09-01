@@ -2,7 +2,7 @@ import type { ServiceVersion } from '../../entities/serviceversion.entity.js';
 import type { ServiceWithVersionCount } from '../service-catalog.service.js';
 
 export class ServiceResponseDto {
-  id: number;
+  id: string;
   name: string;
   description: string;
   versionCount: number;
@@ -20,8 +20,8 @@ export class ServiceResponseDto {
 }
 
 export class ServiceVersionResponseDto {
-  id: number;
-  serviceId: number;
+  id: string;
+  serviceId: string;
   version: string;
   releaseNotes: string | null;
   createdAt: Date;
