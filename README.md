@@ -37,6 +37,29 @@ Schema is auto-created (`synchronize: true`) and sample data is seeded on first 
 | GET | `/services/:id` | Single service (with `versionCount`). 404 if not found. |
 | GET | `/services/:id/versions` | Versions for a service, newest first. 404 if not found |
 
+## Examples
+
+```bash
+# List (defaults: page 1, pageSize 20, sortBy name, order asc)
+curl 'http://localhost:3000/services'
+
+# Search by name (case-insensitive contains), most-recently-updated first
+curl 'http://localhost:3000/services?name=orders&sortBy=updatedAt&order=desc'
+
+# Page 2, 5 per page
+curl 'http://localhost:3000/services?page=2&pageSize=5'
+
+# Single service (grab an id from the list response first)
+curl 'http://localhost:3000/services/3f1c2b9a-7d84-4e2a-9c6b-1a2b3c4d5e6f'
+
+# Versions for that service, newest first
+curl 'http://localhost:3000/services/3f1c2b9a-7d84-4e2a-9c6b-1a2b3c4d5e6f/versions'
+
+# 404 — unknown id; 400 — malformed (non-UUID) id
+curl -i 'http://localhost:3000/services/00000000-0000-0000-0000-000000000000'
+curl -i 'http://localhost:3000/services/not-a-uuid'
+```
+
 ## Data model
 
 - **Service** — `id`, `name`, `description`, `createdAt`, `updatedAt`
